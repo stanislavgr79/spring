@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="
+ 		http://www.springframework.org/schema/beans
+ 		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+ 		http://www.springframework.org/schema/util
+ 		http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+    <import resource="loggers.xml"/>
+    <import resource="others.xml"/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:client.properties</value>
+            </list>
+        </property>
+        <property name="ignoreResourceNotFound" value="true" />
+        <property name="systemPropertiesMode">
+            <util:constant
+                    static-field="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+        </property>
+    </bean>
+
+    <!--    <bean id="app" class="org.example.App">-->
+    <!--        <constructor-arg ref="client"/>-->
+    <!--        <constructor-arg ref="consoleEventLogger"/>-->
+    <!--        <constructor-arg>-->
+    <!--            <map>-->
+    <!--                <entry key="INFO" value-ref="consoleEventLogger"/>-->
+    <!--                <entry key="ERROR" value-ref="combinedEventLogger"/>-->
+    <!--            </map>-->
+    <!--        </constructor-arg>-->
+    <!--        <constructor-arg ref="event"/>-->
+    <!--    </bean>-->
+
+    <bean id="app" class="org.example.App">
+        <constructor-arg ref="client"/>
+        <constructor-arg ref="cacheFileEventLogger"/>
+        <constructor-arg ref="loggerMap"/>
+        <constructor-arg ref="event"/>
+    </bean>
+
+    <!--    <bean id="client" class="org.example.beans.Client">-->
+    <!--        <constructor-arg index="0" type="java.lang.Integer" value="1"/>-->
+    <!--        <constructor-arg index="1" type="java.lang.String" value="J.Smith"/>-->
+    <!--        <property name="greeting" value="Hello there! "/>-->
+    <!--    </bean>-->
+
+    <!--              c:id="${id}"-->
+    <!--              c:name="${name}"-->
+
+    <bean id="client" class="org.example.beans.Client"
+          p:greeting="${greeting}"
+    c:id="${id}"
+    c:name="${name}"
+
+    >
+<!--        <constructor-arg index="0" value="${id}" />-->
+<!--        <constructor-arg value="${name}" />-->
+    </bean>
+
+    <bean id="event" class="org.example.Event" scope="prototype">
+        <constructor-arg>
+            <bean class="java.util.Date"/>
+        </constructor-arg>
+        <constructor-arg ref="dateFormat"/>
+    </bean>
+    <bean id="dateFormat" class="java.text.DateFormat"
+          factory-method="getDateTimeInstance"/>
+
+    <util:map id="loggerMap" map-class="java.util.TreeMap">
+        <entry key="INFO" value-ref="consoleEventLogger"/>
+        <entry key="ERROR" value-ref="combinedEventLogger"/>
+    </util:map>
+
+    <!--    <bean id="monitor" class="org.example.util.Monitor"/>-->
+    <!--    <bean id="awared" class="org.example.util.AwareBean" init-method="init"/>-->
+
+    <!--    <bean name="">-->
+    <!--        <property name="type">-->
+    <!--            <util:constant static-field="java.lang.Math.PI"/>-->
+    <!--        </property>-->
+    <!--    </bean>-->
+
+    <util:properties id="clientProps" location="classpath:client.properties"/>
+
+
+</beans>
+
+

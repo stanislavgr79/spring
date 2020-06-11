@@ -1,0 +1,11 @@
+org\example\logger\CacheFileEventLogger.class
+org\example\logger\CombinedEventLogger.class
+org\example\util\AwareBean.class
+org\example\logger\EventLogger.class
+org\example\beans\Client.class
+org\example\logger\ConsoleEventLogger.class
+org\example\logger\FileEventLogger.class
+org\example\EventType.class
+org\example\util\Monitor.class
+org\example\App.class
+org\example\Event.class

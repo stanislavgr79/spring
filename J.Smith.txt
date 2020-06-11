@@ -1,0 +1,3 @@
+
+Event{id=0, msg='Hello there!test: John Smith', date=Jun 11, 2020 7:55:50 PM}
+Event{id=0, msg='Hello there!test: John Smith', date=Jun 11, 2020 7:55:59 PM}

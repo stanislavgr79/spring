@@ -1,0 +1,7 @@
+
+[
+java:S1874/"9Remove this use of "writeStringToFile"; it is deprecated.(²†ˆşÿÿÿÿ8òÃï©.
+Z	java:S106""9Replace this use of System.out or System.err by a logger.(éíıÿÿÿÿ8š¶‡Õ©.
+U	java:S106,"9Replace this use of System.out or System.err by a logger.(²ø½8¯óä›ª.
+E
+java:S11481"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8òÃï©.
